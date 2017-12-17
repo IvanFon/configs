@@ -51,12 +51,36 @@ set undolevels=1000
 " Backspace behaviour
 set backspace=indent,eol,start
 
+" Centre cursor
+set scrolloff=25
+
+" Buffers
+" New buffer
+nmap bn :enew<CR>
+" Next buffer
+nmap bt :bnext<CR>
+" Previous buffer
+nmap bT :bprevious<CR>
+" Close buffer
+nmap bd :bd<CR>
+" List buffers
+nmap bl :ls<CR>
+
+" Tabs
+" New tab
+nmap gn :tabnew<CR>
+" Close tab
+nmap gd :tabclose<CR>
+nmap <Leader>of :!firefox-developer %<CR>
+
 " Theme
 syntax on
 colorscheme onedark
 
 " Airline
 let g:airline#extensions#tabline#enabled=1
+set laststatus=2
+let g:airline_powerline_fonts=1
 
 " NERDTree
 map <Leader>n :NERDTreeToggle<CR>
