@@ -2,16 +2,24 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugins
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'w0rp/ale'
+Plug 'cohama/lexima.vim'
 
 " Theme
 Plug 'joshdick/onedark.vim'
 
 call plug#end()
+
+filetype plugin indent on
 
 " Map leader to space
 let mapleader=" "
@@ -83,8 +91,32 @@ set laststatus=2
 let g:airline_powerline_fonts=1
 
 " NERDTree
-map <Leader>n :NERDTreeToggle<CR>
+nmap <Leader>n :NERDTreeToggle<CR>
 
 " CtrlP
 map <C-P> :CtrlP<CR>
+" Ignores
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
+" deoplete
+call deoplete#enable()
+" Tab for autocomplete
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+" Tagbar
+nmap <Leader>t :TagbarToggle<CR>
+
+" lexima
+let g:lexima_enable_newline_rules=1
+
+" ALE
+let g:ale_cpp_clang_options="-std=c++14 -Wc++11-extensions"
+
 
